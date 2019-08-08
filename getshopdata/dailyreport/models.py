@@ -9,9 +9,9 @@ class testdata(models.Model):
     verbose_name = 'test',
     blank = True, null = True, default = 0)
 
-class NiiMoDailyReport(models.Model):
+class ShopDailyReport(models.Model):
   class Meta:
-    verbose_name = 'NiiMo Daily Report'
+    verbose_name = 'Shop Daily Report'
 
   date = models.DateField(
     primary_key = True,

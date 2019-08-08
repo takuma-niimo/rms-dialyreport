@@ -1,5 +1,5 @@
 from django.contrib import admin
-from dailyreport.models import NiiMoDailyReport
+from dailyreport.models import ShopDailyReport
 from dailyreport.models import testdata
 
 class testdataAdmin(admin.ModelAdmin):
@@ -9,7 +9,7 @@ class testdataAdmin(admin.ModelAdmin):
 
 admin.site.register(testdata, testdataAdmin)
 
-class NiiMoDailyReportAdmin(admin.ModelAdmin):
+class ShopDailyReportAdmin(admin.ModelAdmin):
   # list_display = ('id','pidata1', 'pidata2', 'pidata3', 'pidata4','pidata5',)
   dailydata = (
     'date',
@@ -49,4 +49,4 @@ class NiiMoDailyReportAdmin(admin.ModelAdmin):
     'acc_daily_sp',
   )
 
-admin.site.register(NiiMoDailyReport, NiiMoDailyReportAdmin)
+admin.site.register(ShopDailyReport, ShopDailyReportAdmin)

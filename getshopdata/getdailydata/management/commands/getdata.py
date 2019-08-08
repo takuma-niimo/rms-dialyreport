@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from dailyreport.models import NiiMoDailyReport
+from dailyreport.models import ShopDailyReport
 
 import sys
 import re
@@ -226,54 +226,15 @@ def login(d):
     d.find_element_by_tag_name('body').send_keys(Keys.F12)
 
     # Enter id1
-    d.find_element_by_name('login_id').send_keys('horebore')
-    _keys = 'horebore0' + str(i)
+    d.find_element_by_name('login_id').send_keys('__rmsshopuser__')
+    _keys = '__rmsshoppasswd__' + str(i)
     d.find_element_by_name('passwd').send_keys(_keys)
     d.find_element_by_name('submit').click()
 
     try:
       # Enter id2
-      d.find_element_by_name('user_id').send_keys('takuma.sato.niimo@gmail.com')
-      d.find_element_by_name('user_passwd').send_keys('SBaq7TT7')
-      print('{0}: success'.format(_keys))
-
-    except:
-      print('{0}: failed'.format(_keys))
-      continue
-
-    # Click 'notice' button
-    d.find_element_by_name('submit').click()
-
-    # Click RMS role
-    d.find_element_by_name('submit').click()
-    d.find_element_by_id('confirm').click()
-
-    return d
-
-  return False
-
-def login(d):
-  d.implicitly_wait(3)
-  d.set_page_load_timeout(10)
-
-  for i in range(10):
-    try:
-      d.get('https://glogin.rms.rakuten.co.jp/?sp_id=1')
-    except:
-      print('NG: https://glogin.rms.rakuten.co.jp/?sp_id=1')
-
-    d.find_element_by_tag_name('body').send_keys(Keys.F12)
-
-    # Enter id1
-    d.find_element_by_name('login_id').send_keys('horebore')
-    _keys = 'horebore0' + str(i)
-    d.find_element_by_name('passwd').send_keys(_keys)
-    d.find_element_by_name('submit').click()
-
-    try:
-      # Enter id2
-      d.find_element_by_name('user_id').send_keys('takuma.sato.niimo@gmail.com')
-      d.find_element_by_name('user_passwd').send_keys('SBaq7TT7')
+      d.find_element_by_name('user_id').send_keys('__rmsuser__')
+      d.find_element_by_name('user_passwd').send_keys('__rmspasswd__')
       print('{0}: success'.format(_keys))
 
     except:
@@ -293,9 +254,9 @@ def login(d):
 
 def printdata(d):
   print(d['date'])
-  print('●店舗名: 新潟モノづくり NiiMo')
-  print('●店舗URL: https://www.rakuten.co.jp/ep-naire/')
-  print('●ニックネーム: たくま')
+  print('●店舗名: __shopname__')
+  print('●店舗URL: __shopurl__')
+  print('●ニックネーム: __nickname__')
   print('●昨日売上: {0:,d}円\n　PC={1:,d}円\n　SP={2:,d}円'.format(d['dailysales'], d['dailysales_pc'], d['dailysales_sp']))
   print('●アクセス人数(月): {0:,d}人 ({1:+d}%)'.format(d['pvuser_monthly'], d['yratio_pvuser']))
   print('　PC: {0:,d}人\n　SP: {1:,d}人'.format(d['pvuser_monthly_pc'], d['pvuser_monthly_sp']))
@@ -318,10 +279,10 @@ def printdata(d):
   print('【コメント】')
 
 def adddata(d):
-  if NiiMoDailyReport.objects.all().filter(date=d['date']):
+  if ShopDailyReport.objects.all().filter(date=d['date']):
     return False
   else:
-    report = NiiMoDailyReport.objects.create(
+    report = ShopDailyReport.objects.create(
         date = d['date'],
         dailysales = d['dailysales'],
         dailysales_pc = d['dailysales_pc'],
