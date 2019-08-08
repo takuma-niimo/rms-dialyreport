@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load myfilter %}
+{% block title %}{{d.date | date:'Y-m-d'}} report{% endblock title %}
+
+{% block content %}
+
+<h3>{{d.date | date:'Y/n/j'}} Report</h3>
+  <p>●店舗名: 新潟モノづくり NiiMo<br>
+●店舗URL: https://www.rakuten.co.jp/ep-naire/<br>
+●ニックネーム: たくま<br>
+●昨日売上: {{d.dailysales | intcomma}}円<br>
+　PC: {{d.dailysales_pc | intcomma}}円<br>
+　SP: {{d.dailysales_sp | intcomma}}円<br>
+●アクセス人数(月): {{d.pvuser_monthly | intcomma}}人 ({{d.yratio_pvuser | floatformat:0}}%)<br>
+　PC: {{d.pvuser_monthly_pc | intcomma}}人<br>
+　SP: {{d.pvuser_monthly_sp | intcomma}}人<br>
+●アクセス人数(日): {{d.pvuser_daily | intcomma}}人<br>
+　PC: {{d.pvuser_daily_pc | intcomma}}人<br>
+　SP: {{d.pvuser_daily_sp | intcomma}}人<br>
+●転換率(月): {{d.cvr_monthly | floatformat:-2}}% ({{d.yratio_cvr | floatformat:0}}%)<br>
+　PC: {{d.cvr_monthly_pc | floatformat:-2}}%<br>
+　SP: {{d.cvr_monthly_sp | floatformat:-2}}%<br>
+●転換率(月): {{d.cvr_daily | floatformat:-2}}% ({{d.yratio_cvr | floatformat:0}}%)<br>
+　PC: {{d.cvr_daily_pc | floatformat:-2}}%<br>
+　SP: {{d.cvr_daily_sp | floatformat:-2}}%<br>
+●客単価(月): {{d.acc_monthly}}円 ({{d.yratio_acc | floatformat:0}}%)<br>
+　PC: {{d.acc_monthly_pc | intcomma}}円<br>
+　SP: {{d.acc_monthly_sp | intcomma}}円<br>
+●客単価(日): {{d.acc_daily}}円 ({{d.yratio_acc | floatformat:0}}%)<br>
+　PC: {{d.acc_daily_pc | intcomma}}円<br>
+　SP: {{d.acc_daily_sp | intcomma}}円<br>
+●今月累計売上: {{d.monthlysales | intcomma}}円 ({{d.yratio_monthlysales | floatformat:0}}%)<br>
+●目標金額(昨年2倍): 6,000,000円 ({{d.sales_lastyear | mlt:2 | intcomma}}円)<br>
+●目標達成率: {{d.monthlysales | percenet:6000000 | floatformat:-1}}%<br>
+【楽天市場運営時間】(受注・発送作業のぞく):<br>
+【昨日やったこと】<br>
+【今日やること、やったこと】<br>
+【コメント】</p>
+
+{% endblock content %}
+

@@ -1,0 +1,6 @@
+log
+_getshopdata/
+*.pyc
+[0-9][0-9][0-9][0-9]_*
+db.sqlite3
+!.gitkeep

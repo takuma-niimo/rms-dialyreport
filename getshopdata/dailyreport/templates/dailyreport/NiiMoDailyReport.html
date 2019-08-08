@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block title %}NiiMo DB{% endblock title %}
+
+{% block extrahead %}
+{% endblock %}
+
+{% block content %}
+<h3 class="page-header">NiiMo Shop Database</h3>
+
+<table class="table table-hover table-striped">
+  <tr>
+    <th>日付</th>
+    <th>売上</th>
+    <th>月累計売上</th>
+    <th>アクセス人数</th>
+    <th>転換率</th>
+    <th>客単価</th>
+    <th>日報</th>
+  </tr>
+
+{% for item in niimodata %}
+  <tr>
+    <td>{{item.date | date:'Y-m-d'}}</td>
+    <td>{{item.dailysales | intcomma}} 円</td>
+    <td>{{item.monthlysales | intcomma}} 円</td>
+    <td>{{item.pvuser_daily | intcomma}} 人</td>
+    <td>{{item.cvr_monthly | floatformat:2}} %</td>
+    <td>{{item.acc_monthly | intcomma}} 円</td>
+    {% with year=item.date.year month=item.date.month day=item.date.day %}
+    <td><a href="{% url 'dailyreport:report' %}?y={{year}}&m={{month}}&d={{day}}">#</a></td>
+    {# <td><a href="{% url 'dailyreport:report' %}">#</a></td> #}
+    {% endwith %}
+  </tr>
+{% endfor %}
+</table>
+
+{% endblock content %}
+
