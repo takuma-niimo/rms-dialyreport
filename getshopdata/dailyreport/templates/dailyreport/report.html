@@ -6,9 +6,9 @@
 {% block content %}
 
 <h3>{{d.date | date:'Y/n/j'}} Report</h3>
-  <p>●店舗名: 新潟モノづくり NiiMo<br>
-●店舗URL: https://www.rakuten.co.jp/ep-naire/<br>
-●ニックネーム: たくま<br>
+  <p>●店舗名: __shopname__<br>
+●店舗URL: __shopurl__<br>
+●ニックネーム: __nickname__<br>
 ●昨日売上: {{d.dailysales | intcomma}}円<br>
 　PC: {{d.dailysales_pc | intcomma}}円<br>
 　SP: {{d.dailysales_sp | intcomma}}円<br>
