@@ -377,6 +377,7 @@ class Command(BaseCommand):
       cpprint(data)
       if adddata(data) == False:
         print('data {0} is already exists.'.format(data['date']))
+        sys.exit(1)
       browser.quit()
     except:
       browser.quit()
